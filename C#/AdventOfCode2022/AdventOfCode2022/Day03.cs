@@ -46,9 +46,8 @@ namespace AdventOfCode2022
                         break;
                     }
                 }
-
-                Console.WriteLine(totalPriority);
             }
+            Console.WriteLine(totalPriority);
         }
 
         private Dictionary<char, int> _priorityMap = new Dictionary<char, int>
