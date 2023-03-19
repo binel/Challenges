@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AdventOfCode2022
 {
-    public static class Day02
+    public class Day02 : BaseDay
     {
         private const string TRAINING_FILE_PATH = "Input/input_02_0.txt";
         private const string QUESTION_FILE_PATH = "Input/input_02_1.txt";
@@ -33,23 +33,27 @@ namespace AdventOfCode2022
         private const int PAPER_POINTS = 2;
         private const int SCISSORS_POINTS = 3;
 
-        private enum Throw {
+        private enum Throw
+        {
             ROCK = ROCK_POINTS,
             PAPER = PAPER_POINTS,
             SCISSORS = SCISSORS_POINTS
         }
 
-        private enum GameOutcome {
+        private enum GameOutcome
+        {
             WIN = WIN_POINTS,
             DRAW = DRAW_POINTS,
             LOOSE = LOOSE_POINTS
         }
 
-        public static void FindTotalScore_Part1()
+        public override int DayNumber { get; set; } = 2;
+
+        public override void PuzzlePart1(bool training)
         {
-            string[] lines = System.IO.File.ReadAllLines(QUESTION_FILE_PATH);
+            string[] lines = GetLinesOfInput(training);
             int score = 0;
-            foreach(var line in lines)
+            foreach (var line in lines)
             {
                 var split = line.Split(" ");
                 var opponentPlay = ParseThrow(split[0]);
@@ -73,15 +77,15 @@ namespace AdventOfCode2022
                         throw new ArgumentException($"Unsupported player play {playerPlay}");
                 }
 
-                Console.WriteLine($"Player {outcome} - score {score}");
+                //Console.WriteLine($"Player {outcome} - score {score}");
             }
 
             Console.WriteLine($"Score: {score}");
         }
 
-        public static void FindTotalScore_Part2()
+        public override void PuzzlePart2(bool training)
         {
-            string[] lines = System.IO.File.ReadAllLines(QUESTION_FILE_PATH);
+            string[] lines = GetLinesOfInput(training);
             int score = 0;
             foreach (var line in lines)
             {
@@ -203,5 +207,7 @@ namespace AdventOfCode2022
                     throw new ArgumentNullException($"Unsupported play {opponentPlay}");
             }
         }
+
+
     }
 }

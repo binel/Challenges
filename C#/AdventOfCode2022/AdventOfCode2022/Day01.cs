@@ -9,19 +9,18 @@ namespace AdventOfCode2022
 {
     // https://adventofcode.com/2022/day/1
 
-    public static class Day01
+    public class Day01 : BaseDay
     {
-        private const string trainingFilePath = "Input/input_01_0.txt";
-        private const string filePath = "Input/input_01_1.txt";
+        public override int DayNumber { get; set; } = 1;
 
         private class Elf
         {
             public int Calories { get; set; }
         }
 
-        public static void FindWellPackedElf()
+        public override void PuzzlePart1(bool training)
         {
-            string[] lines = File.ReadAllLines(filePath);
+            string[] lines = GetLinesOfInput(training);
 
             List<Elf> elves = new List<Elf>();
             Elf workingElf = new Elf();
@@ -32,16 +31,38 @@ namespace AdventOfCode2022
                     elves.Add(workingElf);
                     workingElf = new Elf();
                 }
-                else {
+                else
+                {
                     workingElf.Calories += int.Parse(line);
                 }
             }
 
             var sortedElves = elves.OrderByDescending(e => e.Calories).ToList();
-            Console.WriteLine($"Answer 1: {sortedElves[0].Calories}");
+            Console.WriteLine($"{sortedElves[0].Calories}");
+        }
 
+        public override void PuzzlePart2(bool training)
+        {
+            string[] lines = GetLinesOfInput(training);
+
+            List<Elf> elves = new List<Elf>();
+            Elf workingElf = new Elf();
+            foreach (var line in lines)
+            {
+                if (string.IsNullOrWhiteSpace(line))
+                {
+                    elves.Add(workingElf);
+                    workingElf = new Elf();
+                }
+                else
+                {
+                    workingElf.Calories += int.Parse(line);
+                }
+            }
+
+            var sortedElves = elves.OrderByDescending(e => e.Calories).ToList();
             var top3Sum = sortedElves.Take(3).Sum(e => e.Calories);
-            Console.WriteLine($"Answer 2: {top3Sum}");
+            Console.WriteLine($"{top3Sum}");
         }
     }
 }

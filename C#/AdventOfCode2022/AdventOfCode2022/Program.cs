@@ -6,10 +6,16 @@ namespace AdventOfCode2022
     {
         static void Main(string[] args)
         {
-            // Day01.FindWellPackedElf();
-            Stopwatch s = Stopwatch.StartNew();
-            Day02.FindTotalScore_Part2();
-            Console.WriteLine($"{s.Elapsed}");
+            BaseDay day = new Day03();
+
+            Console.WriteLine("Part 1 Training:");
+            day.PuzzlePart1(true);
+            Console.WriteLine("Part 1 Puzzle:");
+            day.PuzzlePart1(false);
+            Console.WriteLine("Part 2 Training:");
+            day.PuzzlePart2(true);
+            Console.WriteLine("Part 2 Puzzle:");
+            day.PuzzlePart2(false);
         }
     }
 }
