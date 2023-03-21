@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,19 @@ namespace AdventOfCode2022
 
         public override void PuzzlePart2(bool training)
         {
-            Console.WriteLine("Not done");
+            string[] lines = GetLinesOfInput(training);
+
+            Forrest forrest = new Forrest(lines);
+            int maxScenicScore = 0;
+            for (int h = 0; h < forrest.Height; h++)
+            {
+                for (int w = 0; w < forrest.Width; w++)
+                {
+                    int score = forrest.ScenicScore(w, h);
+                    maxScenicScore = Math.Max(score, maxScenicScore);
+                }
+            }
+            Console.WriteLine(maxScenicScore);
         }
 
 
@@ -117,8 +130,86 @@ namespace AdventOfCode2022
                     }
                 }
                 return true;
+            }
 
+            public int ScenicScore(int x, int y)
+            {
+                if (x == 0 || y == 0 || x == Width - 1 || y == Height - 1)
+                {
+                    return 0;
+                }
 
+                int score;
+                int rowScore = 0;
+                for (int i = x - 1; i >= 0; i--)
+                {
+                    rowScore++;
+                    if (TreeGrid[i, y].Height >= TreeGrid[x, y].Height)
+                    {
+                        break;
+                    }
+                }
+                score = rowScore;
+                rowScore = 0;
+
+                for (int i = x + 1; i < Width; i++)
+                {
+                    rowScore++;
+                    if (TreeGrid[i, y].Height >= TreeGrid[x, y].Height)
+                    {
+                        break;
+                    }
+                }
+                score *= rowScore;
+                rowScore = 0;
+
+                for (int i = y - 1; i >= 0; i--)
+                {
+                    rowScore++;
+                    if (TreeGrid[x, i].Height >= TreeGrid[x, y].Height)
+                    {
+                        break;
+                    }
+                }
+                score *= rowScore;
+                rowScore = 0;
+
+                for (int i = y + 1; i < Height; i++)
+                {
+                    rowScore++;
+                    if (TreeGrid[x, i].Height >= TreeGrid[x, y].Height)
+                    {
+                        break;
+                    }
+                }
+                score *= rowScore;
+                return score;
+            }
+
+            public int ViewingDistance(Tree t, int start, int end, bool row, int invarient)
+            {
+                int visibleTrees = 0;
+                if (row)
+                {
+                    for (int i = start; i < end; i++)
+                    {
+                        visibleTrees++;
+                        if (TreeGrid[i, invarient].Height > t.Height)
+                        {
+                            return visibleTrees;
+                        }
+                    }
+                }
+                for (int i = start; i < end; i++)
+                {
+                    visibleTrees++;
+                    if (TreeGrid[invarient, i].Height > t.Height)
+                    {
+                        return visibleTrees;
+                    }
+                }
+
+                return visibleTrees;
             }
         }
     }
