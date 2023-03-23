@@ -20,7 +20,7 @@ namespace AdventOfCode2022
     {
         public override int DayNumber { get; set; } = 8;
 
-        public override void PuzzlePart1(bool training)
+        public override string PuzzlePart1(bool training)
         {
             string[] lines = GetLinesOfInput(training);
 
@@ -33,10 +33,10 @@ namespace AdventOfCode2022
                     count += forrest.IsTreeVisible(w, h) ? 1 : 0;
                 }
             }
-            Console.WriteLine(count);
+            return count.ToString();
         }
 
-        public override void PuzzlePart2(bool training)
+        public override string PuzzlePart2(bool training)
         {
             string[] lines = GetLinesOfInput(training);
 
@@ -50,7 +50,7 @@ namespace AdventOfCode2022
                     maxScenicScore = Math.Max(score, maxScenicScore);
                 }
             }
-            Console.WriteLine(maxScenicScore);
+            return maxScenicScore.ToString();
         }
 
 

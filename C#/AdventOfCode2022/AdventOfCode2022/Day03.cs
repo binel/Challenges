@@ -11,7 +11,7 @@ namespace AdventOfCode2022
     {
         public override int DayNumber { get; set; } = 3;
 
-        public override void PuzzlePart1(bool training)
+        public override string PuzzlePart1(bool training)
         {
             string[] lines = GetLinesOfInput(training);
             int totalPriority = 0;
@@ -21,9 +21,10 @@ namespace AdventOfCode2022
                 totalPriority += _priorityMap[dupe];
             }
             Console.WriteLine(totalPriority);
+            return totalPriority.ToString();
         }
 
-        public override void PuzzlePart2(bool training)
+        public override string PuzzlePart2(bool training)
         {
             string[] lines = GetLinesOfInput(training);
             int totalPriority = 0;
@@ -48,6 +49,7 @@ namespace AdventOfCode2022
                 }
             }
             Console.WriteLine(totalPriority);
+            return totalPriority.ToString();
         }
 
         private Dictionary<char, int> _priorityMap = new Dictionary<char, int>

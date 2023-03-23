@@ -49,7 +49,7 @@ namespace AdventOfCode2022
 
         public override int DayNumber { get; set; } = 2;
 
-        public override void PuzzlePart1(bool training)
+        public override string PuzzlePart1(bool training)
         {
             string[] lines = GetLinesOfInput(training);
             int score = 0;
@@ -81,9 +81,10 @@ namespace AdventOfCode2022
             }
 
             Console.WriteLine($"Score: {score}");
+            return score.ToString();
         }
 
-        public override void PuzzlePart2(bool training)
+        public override string PuzzlePart2(bool training)
         {
             string[] lines = GetLinesOfInput(training);
             int score = 0;
@@ -113,6 +114,7 @@ namespace AdventOfCode2022
             }
 
             Console.WriteLine($"Score: {score}");
+            return score.ToString();
         }
 
         private static Throw ParseThrow(string play)

@@ -11,14 +11,14 @@ namespace AdventOfCode2022
     {
         public override int DayNumber { get; set; } = 7;
 
-        public override void PuzzlePart1(bool training)
+        public override string PuzzlePart1(bool training)
         {
            var root = MainLogic(training);
 
-            Console.WriteLine(SumDirectory(root, 0));
+            return SumDirectory(root, 0).ToString();
         }
 
-        public override void PuzzlePart2(bool training)
+        public override string PuzzlePart2(bool training)
         {
             var root = MainLogic(training);
             int totalSpace = 70000000;
@@ -27,7 +27,7 @@ namespace AdventOfCode2022
             int unusedSpace = totalSpace - usedSpace;
 
             int deleteSpaceRequired = neededSpace - unusedSpace;
-            Console.WriteLine(FindSmallestDirectoryLargerThan(deleteSpaceRequired, null, root).GetSize());
+            return FindSmallestDirectoryLargerThan(deleteSpaceRequired, null, root).GetSize().ToString();
         }
 
         public Directory MainLogic(bool training)

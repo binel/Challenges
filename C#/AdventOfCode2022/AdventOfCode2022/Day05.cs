@@ -12,17 +12,17 @@ namespace AdventOfCode2022
     {
         public override int DayNumber { get; set; } = 5;
 
-        public override void PuzzlePart1(bool training)
+        public override string PuzzlePart1(bool training)
         {
-            MainLogic(training, true);
+            return MainLogic(training, true);
         }
 
-        public override void PuzzlePart2(bool training)
+        public override string PuzzlePart2(bool training)
         {
-            MainLogic(training, false);
+            return MainLogic(training, false);
         }
 
-        private void MainLogic(bool training, bool moveOneByOne)
+        private string MainLogic(bool training, bool moveOneByOne)
         {
             string[] lines = GetLinesOfInput(training);
             lines = lines.Reverse().ToArray(); // It's easier to work backwards 
@@ -71,8 +71,7 @@ namespace AdventOfCode2022
             {
                 supplies.ExecuteMove(m, moveOneByOne);
             }
-
-            Console.WriteLine(supplies.GetTopCrates());
+            return supplies.GetTopCrates();
         }
 
         public class Crate

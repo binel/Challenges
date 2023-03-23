@@ -6,7 +6,7 @@ namespace AdventOfCode2022
     {
         static void Main(string[] args)
         {
-            BaseDay day = new Day09();
+            BaseDay day = new Day01();
 
             Console.WriteLine("Part 1 Training:");
             day.PuzzlePart1(true);

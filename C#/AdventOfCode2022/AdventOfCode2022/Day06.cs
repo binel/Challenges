@@ -10,17 +10,17 @@ namespace AdventOfCode2022
     {
         public override int DayNumber { get; set; } = 6;
 
-        public override void PuzzlePart1(bool training)
+        public override string PuzzlePart1(bool training)
         {
-            MainLogic(training, 4);
+            return MainLogic(training, 4);
         }
 
-        public override void PuzzlePart2(bool training)
+        public override string PuzzlePart2(bool training)
         {
-            MainLogic(training, 14);
+            return MainLogic(training, 14);
         }
 
-        private void MainLogic(bool training, int length)
+        private string MainLogic(bool training, int length)
         {
             var lines = GetLinesOfInput(training);
             var datastream = lines[0];
@@ -35,7 +35,7 @@ namespace AdventOfCode2022
                 }
             }
 
-            Console.WriteLine(markerPosition);
+            return markerPosition.ToString();
         }
 
         private bool IsUniqueCharSubstring(string databuffer, int start, int length)

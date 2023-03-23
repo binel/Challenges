@@ -11,7 +11,7 @@ namespace AdventOfCode2022
     {
         public override int DayNumber { get; set; } = 9;
 
-        public override void PuzzlePart1(bool training)
+        public override string PuzzlePart1(bool training)
         {
             string[] lines = GetLinesOfInput(training);
             Simulation s = new Simulation();
@@ -23,12 +23,12 @@ namespace AdventOfCode2022
 
             s.PrintSimulationState();
 
-            Console.WriteLine(s.CountUniqueTailPositions());
+            return s.CountUniqueTailPositions().ToString();
         }
 
-        public override void PuzzlePart2(bool training)
+        public override string PuzzlePart2(bool training)
         {
-            Console.WriteLine("Not Done");
+            return "Not done";
         }
 
         public class Simulation

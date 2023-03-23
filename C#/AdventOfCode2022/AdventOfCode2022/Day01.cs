@@ -18,7 +18,7 @@ namespace AdventOfCode2022
             public int Calories { get; set; }
         }
 
-        public override void PuzzlePart1(bool training)
+        public override string PuzzlePart1(bool training)
         {
             string[] lines = GetLinesOfInput(training);
 
@@ -38,10 +38,10 @@ namespace AdventOfCode2022
             }
 
             var sortedElves = elves.OrderByDescending(e => e.Calories).ToList();
-            Console.WriteLine($"{sortedElves[0].Calories}");
+            return $"{sortedElves[0].Calories}";
         }
 
-        public override void PuzzlePart2(bool training)
+        public override string PuzzlePart2(bool training)
         {
             string[] lines = GetLinesOfInput(training);
 
@@ -59,10 +59,12 @@ namespace AdventOfCode2022
                     workingElf.Calories += int.Parse(line);
                 }
             }
+
+            elves.Add(workingElf);
 
             var sortedElves = elves.OrderByDescending(e => e.Calories).ToList();
             var top3Sum = sortedElves.Take(3).Sum(e => e.Calories);
-            Console.WriteLine($"{top3Sum}");
+            return $"{top3Sum}";
         }
     }
 }
