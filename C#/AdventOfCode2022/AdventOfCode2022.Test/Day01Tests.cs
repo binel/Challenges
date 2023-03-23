@@ -7,34 +7,16 @@ using System.Threading.Tasks;
 namespace AdventOfCode2022.Test
 {
     [TestFixture]
-    public class Day01Tests
+    internal class Day01Tests: BaseDayTests
     {
-        [Test]
-        public void Part1Training()
-        {
-            Day01 day = new();
-            Assert.That(day.PuzzlePart1(true), Is.EqualTo("24000"));
-        }
+        internal override BaseDay Day => new Day01();
 
-        [Test]
-        public void Part1()
-        {
-            Day01 day = new();
-            Assert.That(day.PuzzlePart1(false), Is.EqualTo("67450"));
-        }
+        internal override string Part1TrainingSolution => "24000";
 
-        [Test]
-        public void Part2Training()
-        {
-            Day01 day = new();
-            Assert.That(day.PuzzlePart2(true), Is.EqualTo("45000"));
-        }
+        internal override string Part1Solution => "67450";
 
-        [Test]
-        public void Part2()
-        {
-            Day01 day = new();
-            Assert.That(day.PuzzlePart2(false), Is.EqualTo("199357"));
-        }
+        internal override string Part2TrainingSolution => "45000";
+
+        internal override string Part2Solution => "199357";
     }
 }
