@@ -22,7 +22,7 @@ namespace AdventOfCode2022
 
         public override string PuzzlePart1(bool training)
         {
-            string[] lines = GetLinesOfInput(training);
+            string[] lines = GetInput(training);
 
             Forrest forrest = new Forrest(lines);
             int count = 0;
@@ -38,7 +38,7 @@ namespace AdventOfCode2022
 
         public override string PuzzlePart2(bool training)
         {
-            string[] lines = GetLinesOfInput(training);
+            string[] lines = GetInput(training);
 
             Forrest forrest = new Forrest(lines);
             int maxScenicScore = 0;

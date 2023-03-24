@@ -24,7 +24,7 @@ namespace AdventOfCode2022
 
         private string MainLogic(bool training, bool moveOneByOne)
         {
-            string[] lines = GetLinesOfInput(training);
+            string[] lines = GetInput(training);
             lines = lines.Reverse().ToArray(); // It's easier to work backwards 
             Stack<Move> moves = new Stack<Move>();
             Supplies supplies = new Supplies();

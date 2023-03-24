@@ -32,7 +32,7 @@ namespace AdventOfCode2022
 
         public Directory MainLogic(bool training)
         {
-            string[] lines = GetLinesOfInput(training);
+            string[] lines = GetInput(training);
 
             State s = new State { Input = lines };
             

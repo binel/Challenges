@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AdventOfCode2022
+﻿namespace AdventOfCode2022
 {
     public class Day03 : BaseDay
     {
@@ -13,7 +6,7 @@ namespace AdventOfCode2022
 
         public override string PuzzlePart1(bool training)
         {
-            string[] lines = GetLinesOfInput(training);
+            string[] lines = GetInput(training);
             int totalPriority = 0;
             foreach(var line in lines)
             {
@@ -26,7 +19,7 @@ namespace AdventOfCode2022
 
         public override string PuzzlePart2(bool training)
         {
-            string[] lines = GetLinesOfInput(training);
+            string[] lines = GetInput(training);
             int totalPriority = 0;
             for(int groups = 0; groups < lines.Length / 3; groups++)
             {

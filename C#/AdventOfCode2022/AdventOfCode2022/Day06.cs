@@ -22,7 +22,7 @@ namespace AdventOfCode2022
 
         private string MainLogic(bool training, int length)
         {
-            var lines = GetLinesOfInput(training);
+            var lines = GetInput(training);
             var datastream = lines[0];
 
             int markerPosition = 0;

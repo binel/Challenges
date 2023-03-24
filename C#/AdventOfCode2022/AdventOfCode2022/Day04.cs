@@ -27,7 +27,7 @@ namespace AdventOfCode2022
 
         private string CommonLogic(Func<Section, Section, bool> countCondition, bool training)
         {
-            string[] lines = GetLinesOfInput(training);
+            string[] lines = GetInput(training);
 
             int count = 0;
             foreach (var line in lines)
