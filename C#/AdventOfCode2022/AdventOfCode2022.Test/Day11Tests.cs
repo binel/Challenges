@@ -14,10 +14,9 @@ namespace AdventOfCode2022.Test
 
         internal override string Part1Solution => "55458";
 
-        internal override string Part2TrainingSolution => "0";
+        internal override string Part2TrainingSolution => "2713310158";
 
         internal override string Part2Solution => "0";
-
 
     }
 }

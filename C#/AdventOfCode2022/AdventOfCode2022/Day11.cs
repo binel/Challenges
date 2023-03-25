@@ -207,8 +207,18 @@ namespace AdventOfCode2022
                 }
             }
 
-            for (int round = 1; round < 1001; round++)
+            int allDivis = 1;
+            monkies.ForEach(m => allDivis *= m.DivisibleNumber);
+
+            for (int round = 1; round < 10001; round++)
             {
+                if (round % 100 == 0) { 
+                    Console.WriteLine($"Round {round}");
+                    for (int i = 0; i < monkies.Count; i++)
+                    {
+                        Console.WriteLine($"Monkey {i}: " + string.Join(",", monkies[i].Items));
+                    }
+                }
                 for (int monkeyIndex = 0; monkeyIndex < monkies.Count; monkeyIndex++)
                 {
                     Monkey monkey = monkies[monkeyIndex];
@@ -217,31 +227,17 @@ namespace AdventOfCode2022
                         BigInteger item = monkey.Items[itemIndex];
                         item = monkey.Operation(item);
                         monkey.InspectionCount++;
-                        //item %= monkey.DivisibleNumber;
+                        item %= allDivis;
                         int throwMonkey = monkey.Test(item) ? monkey.TrueMonkey : monkey.FalseMonkey;
                         monkies[throwMonkey].Items.Add(item);
                     }
                     monkey.Items.RemoveAll(p => true);
                 }
-                if (round == 1 || round == 20 || round == 1000 || round == 2000)
-                {
-                    Console.WriteLine($"After round {round}:");
-                    for (int i = 0; i < monkies.Count; i++)
-                    {
-                        Console.WriteLine($"Monkey {i} inspected items {monkies[i].InspectionCount} times");
-                    }
-                }
-
-            }
-
-            for (int i = 0; i < monkies.Count; i++)
-            {
-                Console.WriteLine($"Monkey {i} inspected items {monkies[i].InspectionCount} times");
             }
 
             var sort = monkies.OrderByDescending(m => m.InspectionCount).Take(2).ToList();
 
-            return (sort[0].InspectionCount * sort[1].InspectionCount).ToString();
+            return ((BigInteger)sort[0].InspectionCount * (BigInteger)sort[1].InspectionCount).ToString();
         }
 
         class Monkey
