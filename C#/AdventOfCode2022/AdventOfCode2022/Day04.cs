@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AdventOfCode2022
+﻿namespace AdventOfCode2022
 {
     public class Day04 : BaseDay
     {
@@ -44,7 +37,7 @@ namespace AdventOfCode2022
             return count.ToString();
         }
 
-        private class Section
+        public class Section
         {
             public int Start { get; set; }
             public int End { get; set; }
@@ -69,14 +62,7 @@ namespace AdventOfCode2022
 
             public bool Overlap(Section s)
             {
-                for (int i = Start; i <= End; i++)
-                {
-                    if (s.Contains(i))
-                    {
-                        return true;
-                    }
-                }
-                return false;
+                return !(End < s.Start || Start > s.End);
             }
         }
     }

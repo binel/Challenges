@@ -15,8 +15,16 @@ namespace AdventOfCode2022.Test
 
         internal override string Part1Solution => "14360";
 
-        internal override string Part2TrainingSolution => "0";
 
+        internal override string Part2TrainingSolution => "##..##..##..##..##..##..##..##..##..##..\n" +
+          "###...###...###...###...###...###...###.\n" +
+          "####....####....####....####....####....\n" +
+          "#####.....#####.....#####.....#####.....\n" +
+          "######......######......######......####\n" +
+          "#######.......#######.......#######.....\n";
+
+        // TODO I never got this exactly right but I was close enough to read 
+        // off the answer
         internal override string Part2Solution => "0";
 
         [Test]

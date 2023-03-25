@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace AdventOfCode2022
 {
+    // TODO there is something slightly wrong with this but it's close enough to
+    // read off the output
     public class Day10 : BaseDay
     {
         public override int DayNumber { get; set; } = 10;
@@ -32,7 +34,30 @@ namespace AdventOfCode2022
 
         public override string PuzzlePart2(bool training)
         {
-            return "Not Done";
+            CPU cpu = new CPU();
+            cpu.Program = GetInput(training);
+            string output = "";
+            while (!cpu.ProgramComplete)
+            {
+                cpu.Tick();
+
+                if (cpu.IsPixelDrawn)
+                {
+                    output += "#";
+                }
+                else
+                {
+                    output += ".";
+                }
+
+                if (cpu.Cycle % 40 == 0)
+                {
+                    output += "\n";
+                }
+            }
+
+            Console.Write(output);
+            return output;
         }
 
         public class CPU
@@ -52,6 +77,10 @@ namespace AdventOfCode2022
             public int InstructionPointer { get; set; } = -1;
 
             public bool ProgramComplete { get; set; }
+
+            public int CrtHorizontalPosition => Cycle % 40;
+
+            public bool IsPixelDrawn => Math.Abs(MidCycleRegisterValue - CrtHorizontalPosition) < 2;
 
             public int SignalStrength => MidCycleRegisterValue * Cycle;
 
