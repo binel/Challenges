@@ -1,4 +1,4 @@
-﻿//#define Verbose
+﻿//#define Display
 
 using System;
 using System.Collections.Generic;
@@ -50,13 +50,15 @@ namespace AdventOfCode2022
 
             public Knot Tail { get { return Knots[Knots.Count - 1]; } }
 
-            public int MinXPos { get; set; } = 0;
+            public int MinXPos { get; set; } = -10;
 
-            public int MaxXPos { get; set; } = 0;
+            public int MaxXPos { get; set; } = 10;
 
-            public int MinYPos { get; set; } = 0;
+            public int MinYPos { get; set; } = -10;
 
-            public int MaxYPos { get; set; } = 0;
+            public int MaxYPos { get; set; } = 10;
+
+            public Display d { get; set; } = new Display(100, 100);
 
             public Simulation(int numKnots)
             {
@@ -76,46 +78,20 @@ namespace AdventOfCode2022
                 {
                     for (int k = 0; k < Knots.Count; k++)
                     {
-                        try {
-                            SimulationStep += 1;
-                            MoveKnot(k, direction);
-                            UpdateSimulationBoundaries();
-                            if (StepsToPrint.Contains(SimulationStep))
-                            {
-                                Console.WriteLine($"Simulation step {SimulationStep}");
-                                Console.WriteLine($"Moving knot {k}");
-                                Console.WriteLine($"Move: {move} ({i + 1}/{distance})");
-                                UpdateSimulationBoundaries();
-                                PrintSimulationState();
-                            }
-                        }
-                        catch
-                        {
-                            Console.WriteLine($"Simulation step {SimulationStep}");
-                            Console.WriteLine($"Move: {move} ({i + 1}/{distance})");
-                            Console.WriteLine($"Could knot move knot {k}");
-                            Console.WriteLine($"knot {k} position: ({Knots[k].Position.XPos},{Knots[k].Position.YPos})");
-                            if (k != 0)
-                            {
-                                Console.WriteLine($"knot {k - 1} position: ({Knots[k - 1].Position.XPos},{Knots[k - 1].Position.YPos})");
-                            }
-                            UpdateSimulationBoundaries();
-                            PrintSimulationState();
-                            throw;
-                        }
-                            
+                        SimulationStep += 1;
+                        MoveKnot(k, direction);
+                        UpdateSimulationBoundaries();      
                     }
                     if (UniqueTailPositions.Find(p => p.Equals(Tail.Position)) == null)
                     {
                         UniqueTailPositions.Add(new Position(Tail.Position.XPos, Tail.Position.YPos));
                     }
 
+                    #if Display
+                        PrintSimulationState();
+                    #endif
+
                 }
-                #if Verbose
-                Console.WriteLine(move);
-                UpdateSimulationBoundaries();
-                PrintSimulationState();
-                #endif
             }
 
             public void UpdateSimulationBoundaries()
@@ -131,29 +107,29 @@ namespace AdventOfCode2022
 
             public void PrintSimulationState()
             {
-                for (int y = MaxYPos; y >= MinYPos; y--)
+                d.ClearBuffer();
+
+                for (int y = MinYPos; y <= MaxYPos; y++)
                 {
-                    string line = "";
                     for (int x = MinXPos; x <= MaxXPos; x++)
                     {
                         var k = Knots.Find(p => p.Position.XPos == x && p.Position.YPos == y);
                         Position pos = new Position(x, y);
+                        Position displayPos = new Position(x + Math.Abs(MinXPos), y + Math.Abs(MinYPos));
+                        char displayChar = ' ';
                         if (k != null)
                         {
-                            line += k.Name;
+                            displayChar = k.Name[0];
                         }
                         else if (UniqueTailPositions.Contains(pos))
                         {
-                            line += "#";
+                            displayChar = '#';
                         }
-                        else
-                        {
-                            line += ".";
-                        }
+                        d.SetChar(displayPos.XPos, d.Height - displayPos.YPos - 1, displayChar);
                     }
-                    Console.WriteLine(line);
                 }
-                Console.WriteLine();
+                d.Draw();
+                Thread.Sleep(50);
             }
 
             public Move ParseMove(string move)
@@ -178,9 +154,6 @@ namespace AdventOfCode2022
                 if (knotNumber == 0)
                 {
                     var move = ParseMove(direction);
-                    #if Verbose
-                        Console.WriteLine($"Moving knot {knotNumber} with move {move}");
-                    #endif
                     Knots[0].Position.YPos += YPositionMap[move];
                     Knots[0].Position.XPos += XPositionMap[move];
                 }
@@ -188,9 +161,6 @@ namespace AdventOfCode2022
                 {
                     var relationship = DetermineRelationship(Knots[knotNumber], Knots[knotNumber - 1]);
                     var move = Moves[relationship];
-                    #if Verbose
-                        Console.WriteLine($"Moving knot {knotNumber} with move {move}");
-                    #endif
                     Knots[knotNumber].Position.YPos += YPositionMap[move];
                     Knots[knotNumber].Position.XPos += XPositionMap[move];
                 }
