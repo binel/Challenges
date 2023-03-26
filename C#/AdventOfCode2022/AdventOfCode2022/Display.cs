@@ -20,6 +20,11 @@ namespace AdventOfCode2022
             Width = width;
 
             Buffer = new char[height,width];
+            if (Width > Console.BufferWidth || Height > Console.BufferHeight)
+            {
+                Console.SetBufferSize(Width, Height);
+                Console.SetWindowSize(Width, Height);
+            }
             ClearBuffer();
         }
 
