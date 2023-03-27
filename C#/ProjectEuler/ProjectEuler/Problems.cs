@@ -84,5 +84,68 @@ namespace ProjectEuler
 
             Assert.That(largest, Is.EqualTo(906609));
         }
+
+        [Test]
+        public void Problem5()
+        {
+            int smallest = 21;
+            bool found = false;
+            while (true)
+            {
+                smallest++;
+                for (int i = 2; i < 21; i++)
+                {
+                    if (smallest % i != 0)
+                    {
+                        break;
+                    }
+
+                    if (i == 20)
+                    {
+                        found = true;
+                    }
+                }
+
+                if (found)
+                {
+                    break;
+                }
+            }
+            Assert.That(smallest, Is.EqualTo(232792560));
+        }
+
+        [Test]
+        public void Problem6()
+        {
+            int sumOfSquares = 0;
+            int sumSquared = 0;
+            Enumerable.Range(1, 100).ToList().ForEach(s => sumOfSquares += s * s);
+            Enumerable.Range(1, 100).ToList().ForEach(s => sumSquared += s);
+            sumSquared *= sumSquared;
+            var result = sumSquared - sumOfSquares;
+
+            Assert.That(result, Is.EqualTo(25164150));
+        }
+
+        [Test]
+        public void Problem7()
+        {
+            int primeCount = 1;
+            List<int> primes = new List<int> { 2 };
+            int lastPrime = 2;
+            int num = 2;
+            while (primeCount != 10_001)
+            {
+                num++;
+                if (primes.Find(p => num % p == 0) == 0)
+                {
+                    primes.Add(num);
+                    primeCount++;
+                    lastPrime = num;
+                }
+            }
+            Assert.That(lastPrime, Is.EqualTo(104743));
+
+        }
     }
 }
