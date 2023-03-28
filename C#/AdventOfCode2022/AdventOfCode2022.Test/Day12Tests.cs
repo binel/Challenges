@@ -10,12 +10,12 @@ namespace AdventOfCode2022.Test
     {
         internal override BaseDay Day => new Day12();
 
-        internal override string Part1TrainingSolution => "0";
+        internal override string Part1TrainingSolution => "31";
 
-        internal override string Part1Solution => "0";
+        internal override string Part1Solution => "520";
 
-        internal override string Part2TrainingSolution => "0";
+        internal override string Part2TrainingSolution => "29";
 
-        internal override string Part2Solution => "0";
+        internal override string Part2Solution => "508";
     }
 }
