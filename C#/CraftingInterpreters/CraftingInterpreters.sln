@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CraftingInterpreters", "CraftingInterpreters\CraftingInterpreters.csproj", "{2B9755B6-EC27-4C0D-9CA3-9B63444EC094}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CraftingInterpreters", "CraftingInterpreters\CraftingInterpreters.csproj", "{2B9755B6-EC27-4C0D-9CA3-9B63444EC094}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGen", "CodeGen\CodeGen.csproj", "{E249B6F0-9388-4BD9-A14B-86CF64413CB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CraftingInterpreters.Test", "CraftingInterpreters.Test\CraftingInterpreters.Test.csproj", "{64FA1449-693F-4C73-B1FE-A249190E5525}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{2B9755B6-EC27-4C0D-9CA3-9B63444EC094}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B9755B6-EC27-4C0D-9CA3-9B63444EC094}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B9755B6-EC27-4C0D-9CA3-9B63444EC094}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E249B6F0-9388-4BD9-A14B-86CF64413CB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E249B6F0-9388-4BD9-A14B-86CF64413CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E249B6F0-9388-4BD9-A14B-86CF64413CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E249B6F0-9388-4BD9-A14B-86CF64413CB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64FA1449-693F-4C73-B1FE-A249190E5525}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64FA1449-693F-4C73-B1FE-A249190E5525}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64FA1449-693F-4C73-B1FE-A249190E5525}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64FA1449-693F-4C73-B1FE-A249190E5525}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
