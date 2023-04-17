@@ -19,7 +19,7 @@ namespace CraftingInterpreters
 
       AND, CLASS, ELSE, FALSE, FUN, FOR, IF, NIL, OR,
       PRINT, RETURN, SUPER, THIS, TRUE, VAR, WHILE,
-      GREATER, GREATER_EQUAL, LESS, LESS_EQUAL,
+      GREATER, GREATER_EQUAL, LESS, LESS_EQUAL, NOT,
 
       EOF
     }
