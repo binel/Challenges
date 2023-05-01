@@ -99,7 +99,7 @@ namespace CraftingInterpreters
           }
           else 
           {
-            Error.Report(_line, $"Unexpected character {c}");
+            ErrorReporter.Report(_line, $"Unexpected character {c}");
           }
           break;
       }
@@ -158,7 +158,7 @@ namespace CraftingInterpreters
 
       if (AtEnd())
       {
-        Error.Report(_line, "Unterminated string");
+        ErrorReporter.Report(_line, "Unterminated string");
         return;
       }
 

@@ -8,12 +8,26 @@ namespace CraftingInterpreters
 {
     public class Parser
     {
+        private class ParseError : Exception { }
+
         private readonly List<Token> _tokens;
         private int _current = 0;
 
         public Parser(List<Token> tokens)
         {
             _tokens = tokens;
+        }
+
+        public Expression Parse()
+        {
+            try
+            {
+                return Expression();
+            }
+            catch (ParseError e)
+            {
+                return null;
+            }
         }
 
         private Expression Expression()
@@ -77,7 +91,7 @@ namespace CraftingInterpreters
 
         private Expression Factor()
         {
-            Expression expression = Factor();
+            Expression expression = Unary();
 
             while (Match(Token.TokenType.SLASH, Token.TokenType.STAR))
             {
@@ -144,15 +158,54 @@ namespace CraftingInterpreters
             {
                 Expression expression = Expression();
 
+                Consume(Token.TokenType.RIGHT_BRACKET, "Expected '}' after expression.");
+
                 return new Expression.Grouping
                 {
                     Expression = expression
                 };
             }
 
-
+            throw Error(Peek(), "Expected expression.");
         }
 
+        private void Synchronize()
+        {
+            Advance();
+
+            while (!IsAtEnd())
+            {
+                if (Previous().Type == Token.TokenType.SEMICOLON) return;
+
+                switch (Peek().Type)
+                {
+                    case Token.TokenType.CLASS:
+                    case Token.TokenType.FUN:
+                    case Token.TokenType.VAR:
+                    case Token.TokenType.FOR:
+                    case Token.TokenType.IF:
+                    case Token.TokenType.WHILE:
+                    case Token.TokenType.PRINT:
+                    case Token.TokenType.RETURN:
+                        return;
+                }
+
+                Advance();
+            }
+        }
+
+        private Token Consume(Token.TokenType type, string message)
+        {
+            if (Check(type)) return Advance();
+            throw Error(Peek(), message);
+        }
+
+
+        private ParseError Error(Token token, string message)
+        {
+            ErrorReporter.Error(token, message);
+            return new ParseError();
+        }
 
         private bool Match(params Token.TokenType[] types)
         {

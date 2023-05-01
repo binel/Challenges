@@ -5,7 +5,6 @@ namespace CodeGen
 {
     internal class Program
     {
-        private static readonly string FILENAME = "Expression.cs";
         private static readonly string NAMESPACE = "CraftingInterpreters";
         static void Main(string[] args)
         {
